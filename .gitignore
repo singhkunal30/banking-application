@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+
+#accounts-service
+accounts-service/target
+accounts-service/.idea
