@@ -3,4 +3,6 @@
 
 #accounts-service
 accounts-service/target
-accounts-service/.idea
+
+#cards-service
+cards-service/target
