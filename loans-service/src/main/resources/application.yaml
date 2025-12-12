@@ -1,8 +1,8 @@
 server:
-  port: 9000
+  port: 9002
 spring:
   application:
-    name: accounts-service
+    name: loans-service
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -24,8 +24,8 @@ spring:
     username: "guest"
     password: "guest"
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "health, health-path, info, refresh, busrefresh"
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "health, health-path, info, refresh, busrefresh"

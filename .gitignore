@@ -6,3 +6,9 @@ accounts-service/target
 
 #cards-service
 cards-service/target
+
+#config-server
+config-server/target
+
+#loans-service
+loans-service/target

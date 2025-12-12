@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.banking</groupId>
-	<artifactId>cards-service</artifactId>
+	<artifactId>loans-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>cards-service</name>
-	<description>Cards microservice for banking application</description>
+	<name>loans-service</name>
+	<description>Loans microservice for banking application</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -106,7 +106,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
-    </dependencies>
+	</dependencies>
 
     <dependencyManagement>
         <dependencies>
