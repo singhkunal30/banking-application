@@ -20,8 +20,13 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build all microservice JARs
-        run: mvn -B clean package -DskipTests
+      - name: Build microservices
+        run: |
+          mvn -B -f accounts-service/pom.xml clean package -DskipTests
+          mvn -B -f cards-service/pom.xml clean package -DskipTests
+          mvn -B -f loans-service/pom.xml clean package -DskipTests
+          mvn -B -f config-server/pom.xml clean package -DskipTests
+          mvn -B -f eureka-server/pom.xml clean package -DskipTests
 
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v3
