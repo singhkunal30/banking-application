@@ -12,3 +12,6 @@ config-server/target
 
 #loans-service
 loans-service/target
+
+#eureka-server
+eureka-server/target
