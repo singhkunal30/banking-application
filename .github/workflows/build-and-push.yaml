@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: banking-application
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -20,7 +24,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      # 👇 Build all microservices (jars appear inside each target/ folder)
+      # 👉 BUILD ALL MICROSERVICE JARS
       - name: Build microservices
         run: |
           mvn -B -f accounts-service/pom.xml clean package -DskipTests
@@ -38,26 +42,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Debug repo structure
-        run: |
-          echo "PWD: $(pwd)"
-          echo "FILES:"
-          ls -la
-          echo "----- ACCOUNTS -----"
-          ls -la accounts-service || echo "accounts-service MISSING"
-          echo "----- CARDS -----"
-          ls -la cards-service || echo "cards-service MISSING"
-          echo "----- CONFIG -----"
-          ls -la config-server || echo "config-server MISSING"
-          echo "----- EUREKA -----"
-          ls -la eureka-server || echo "eureka-server MISSING"
-          echo "----- LOANS -----"
-          ls -la loans-service || echo "loans-service MISSING"
-
-      # 👇 Build + push Docker images using docker-bake.hcl
+      # 👉 BUILD & PUSH DOCKER IMAGES USING docker-bake.hcl
       - name: Build & Push Docker Images
-        run: |
-          cd ${{ github.workspace }}/banking-application
-          docker buildx bake --push
+        uses: docker/bake-action@v5
+        with:
+          push: true
         env:
           DOCKER_BUILDKIT: 1
