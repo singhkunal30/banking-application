@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: banking-application
+        working-directory: ${{ github.workspace }}
 
     steps:
       - name: Checkout
@@ -24,7 +24,6 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      # 👉 BUILD ALL MICROSERVICE JARS
       - name: Build microservices
         run: |
           mvn -B -f accounts-service/pom.xml clean package -DskipTests
@@ -42,7 +41,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # 👉 BUILD & PUSH DOCKER IMAGES USING docker-bake.hcl
       - name: Build & Push Docker Images
         uses: docker/bake-action@v5
         with:
