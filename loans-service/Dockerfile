@@ -1,8 +1,7 @@
-#Start with a base image containing Java runtime
 FROM eclipse-temurin:21-jdk
 
-# Add the application's jar to the image
-COPY target/loans-service-0.0.1-SNAPSHOT.jar loans-service-0.0.1-SNAPSHOT.jar
+WORKDIR /app
 
-# execute the application
-ENTRYPOINT ["java", "-jar", "loans-service-0.0.1-SNAPSHOT.jar"]
+COPY target/*.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
