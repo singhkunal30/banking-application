@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     defaults:
       run:
         working-directory: ${{ github.workspace }}
@@ -31,6 +30,9 @@ jobs:
           mvn -B -f loans-service/pom.xml clean package -DskipTests
           mvn -B -f config-server/pom.xml clean package -DskipTests
           mvn -B -f eureka-server/pom.xml clean package -DskipTests
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v3
