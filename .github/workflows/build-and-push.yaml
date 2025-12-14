@@ -30,6 +30,7 @@ jobs:
           mvn -B -f loans-service/pom.xml clean package -DskipTests
           mvn -B -f config-server/pom.xml clean package -DskipTests
           mvn -B -f eureka-server/pom.xml clean package -DskipTests
+          mvn -B -f gateway-server/pom.xml clean package -DskipTests
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3

@@ -15,3 +15,6 @@ loans-service/target
 
 #eureka-server
 eureka-server/target
+
+#gateway-server
+gateway-server/target

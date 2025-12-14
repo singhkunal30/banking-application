@@ -8,7 +8,8 @@ group "default" {
     "cards-service",
     "config-server",
     "eureka-server",
-    "loans-service"
+    "loans-service",
+    "gateway-server"
   ]
 }
 
@@ -45,4 +46,11 @@ target "loans-service" {
   dockerfile = "Dockerfile"
   platforms = PLATFORMS
   tags = ["singhkunal30/loans-service:latest"]
+}
+
+target "gateway-server" {
+  context = "./gateway-server"
+  dockerfile = "Dockerfile"
+  platforms = PLATFORMS
+  tags = ["singhkunal30/gateway-server:latest"]
 }

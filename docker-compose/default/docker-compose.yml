@@ -53,6 +53,22 @@ services:
     environment:
       SPRING_APPLICATION_NAME: "eureka-server"
 
+  gatewayserver:
+    image: "singhkunal30/gateway-server"
+    container_name: gatewayserver-ms
+    ports:
+      - "8072:8072"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "gateway-server"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
   accounts:
     image: "singhkunal30/accounts-service"
     container_name: accounts-ms
