@@ -38,6 +38,22 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Debug repo structure
+        run: |
+          echo "PWD: $(pwd)"
+          echo "FILES:"
+          ls -la
+          echo "----- ACCOUNTS -----"
+          ls -la accounts-service || echo "accounts-service MISSING"
+          echo "----- CARDS -----"
+          ls -la cards-service || echo "cards-service MISSING"
+          echo "----- CONFIG -----"
+          ls -la config-server || echo "config-server MISSING"
+          echo "----- EUREKA -----"
+          ls -la eureka-server || echo "eureka-server MISSING"
+          echo "----- LOANS -----"
+          ls -la loans-service || echo "loans-service MISSING"
+
       # 👇 Build + push Docker images using docker-bake.hcl
       - name: Build & Push Docker Images
         run: |
