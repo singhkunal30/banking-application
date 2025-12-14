@@ -57,7 +57,7 @@ jobs:
       # 👇 Build + push Docker images using docker-bake.hcl
       - name: Build & Push Docker Images
         run: |
-          cd ${GITHUB_WORKSPACE}
+          cd ${{ github.workspace }}/banking-application
           docker buildx bake --push
         env:
           DOCKER_BUILDKIT: 1
