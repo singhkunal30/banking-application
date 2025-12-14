@@ -40,8 +40,6 @@ jobs:
 
       # 👇 Build + push Docker images using docker-bake.hcl
       - name: Build & Push Docker Images
-        run: |
-          cd banking-application
-          docker buildx bake --push
+        run: docker buildx bake --push
         env:
           DOCKER_BUILDKIT: 1
