@@ -10,30 +10,30 @@ group "default" {
 
 target "accounts-service" {
   context = "./accounts-service"
-  dockerfile = "./accounts-service/Dockerfile"
+  dockerfile = "Dockerfile"
   tags = ["singhkunal30/accounts-service:latest"]
 }
 
 target "cards-service" {
   context = "./cards-service"
-  dockerfile = "./cards-service/Dockerfile"
+  dockerfile = "Dockerfile"
   tags = ["singhkunal30/cards-service:latest"]
 }
 
 target "config-server" {
   context = "./config-server"
-  dockerfile = "./config-server/Dockerfile"
+  dockerfile = "Dockerfile"
   tags = ["singhkunal30/config-server:latest"]
 }
 
 target "eureka-server" {
   context = "./eureka-server"
-  dockerfile = "./eureka-server/Dockerfile"
+  dockerfile = "Dockerfile"
   tags = ["singhkunal30/eureka-server:latest"]
 }
 
 target "loans-service" {
   context = "./loans-service"
-  dockerfile = "./loans-service/Dockerfile"
+  dockerfile = "Dockerfile"
   tags = ["singhkunal30/loans-service:latest"]
 }
