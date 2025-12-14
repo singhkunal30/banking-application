@@ -9,6 +9,9 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+    httpclient:
+      connect-timeout: 1000
+      response-timeout: 2s
 
 management:
   endpoints:
@@ -45,3 +48,11 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: "http://localhost:8761/eureka/"
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000

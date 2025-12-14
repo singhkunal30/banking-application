@@ -15,25 +15,43 @@ public class GatewayserverApplication {
 		SpringApplication.run(GatewayserverApplication.class, args);
 	}
 
-	@Bean
-	public RouteLocator routeConfig(RouteLocatorBuilder routeLocatorBuilder) {
-		return routeLocatorBuilder.routes()
-						.route(p -> p
-								.path("/accounts/**")
-								.filters( f -> f.rewritePath("/accounts/(?<segment>.*)","/${segment}")
-										.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
-								.uri("lb://ACCOUNTS-SERVICE"))
-					.route(p -> p
-							.path("/loans/**")
-							.filters( f -> f.rewritePath("/loans/(?<segment>.*)","/${segment}")
-									.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
-							.uri("lb://LOANS-SERVICE"))
-					.route(p -> p
-							.path("/cards/**")
-							.filters( f -> f.rewritePath("/cards/(?<segment>.*)","/${segment}")
-									.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
-							.uri("lb://CARDS-SERVICE")).build();
+    @Bean
+    public RouteLocator routeConfig(RouteLocatorBuilder builder) {
 
+        return builder.routes()
+
+                .route("accounts_route", p -> p
+                        .path("/accounts/**")
+                        .filters(f -> f
+                                .rewritePath("/accounts/(?<segment>.*)", "/${segment}")
+                                .circuitBreaker(c -> c
+                                        .setName("accountsCircuitBreaker")
+                                        .setFallbackUri("forward:/accountsFallback"))
+                        )
+                        .uri("lb://accounts-service")
+                )
+
+                .route("cards_route", p -> p
+                        .path("/cards/**")
+                        .filters(f -> f
+                                .rewritePath("/cards/(?<segment>.*)", "/${segment}")
+                                .circuitBreaker(c -> c
+                                        .setName("cardsCircuitBreaker")
+                                        .setFallbackUri("forward:/cardsFallback"))
+                        )
+                        .uri("lb://cards-service")
+                )
+
+                .route("loans_route", p -> p
+                        .path("/loans/**")
+                        .filters(f -> f
+                                .rewritePath("/loans/(?<segment>.*)", "/${segment}")
+                                .circuitBreaker(c -> c
+                                        .setName("loansCircuitBreaker")
+                                        .setFallbackUri("forward:/loansFallback"))
+                        )
+                        .uri("lb://loans-service")
+                ).build();
 
 	}
 
