@@ -40,6 +40,8 @@ jobs:
 
       # 👇 Build + push Docker images using docker-bake.hcl
       - name: Build & Push Docker Images
-        run: docker buildx bake --push
+        run: |
+          cd ${GITHUB_WORKSPACE}
+          docker buildx bake --push
         env:
           DOCKER_BUILDKIT: 1
