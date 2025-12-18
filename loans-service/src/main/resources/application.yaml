@@ -29,7 +29,7 @@ spring:
     endpoints:
       web:
         exposure:
-          include: "health, health-path, info, refresh, busrefresh"
+          include: "*"
 
 eureka:
   instance:
