@@ -131,7 +131,7 @@ services:
     container_name: promtail
     volumes:
       # 1. Mount your new config file
-      - ../observability/promtail-config.yaml:/etc/promtail/config.yml
+      - ../observability/promtail-config.yml:/etc/promtail/config.yml
       # 2. Mount the docker socket so Promtail can find the containers
       - /var/run/docker.sock:/var/run/docker.sock
       # 3. Mount the docker log directory so Promtail can read the logs
@@ -148,7 +148,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ../observability/prometheus.yml:/etc/prometheus/prometheus.yaml
+      - ../observability/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
       - banking-network
 
